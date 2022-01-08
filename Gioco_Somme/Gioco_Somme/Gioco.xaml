@@ -4,7 +4,7 @@
              x:Class="Gioco_Somme.Gioco">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
-            <Label Text="" x:Name="lbl_quiz" HorizontalOptions="Center" FontSize="18" FontAttributes="Bold" BackgroundColor="Ivory" />
+            <Label Text="" x:Name="lbl_quiz" HorizontalOptions="Center" FontSize="18" FontAttributes="Bold" BackgroundColor="Ivory" TextColor="Black" />
             <Grid ColumnDefinitions="*,*">
                 <Button x:Name="btn_Risp_A" Clicked="btn_Risp_A_Clicked"
                     Text="A" />
@@ -13,17 +13,23 @@
                 <Button x:Name="btn_Risp_C" Grid.Column="2" Clicked="btn_Risp_C_Clicked"
                     Text="C" />
             </Grid>
-            <Label x:Name="lbl_seconds"
-                   Text=""
-                   FontFamily="ComicSans"
-                   FontSize="20"
+            <ProgressBar x:Name="pgr_countDown" Progress="{Binding CountDownPerc}" ProgressColor="Black"/>
+
+            <Label x:Name="lbl_secondi" Text="Secondi" FontSize="24" FontAttributes="Bold" TextColor="Red" />
+            <Label x:Name="lbl_countDown" Text=""
+                    TextColor="Black" FontSize="20" FontAttributes="Bold" FontFamily="ComicSans"      
                    BackgroundColor="Aquamarine"
                    HorizontalOptions="Center" />
+
             <Button Text="Start"
                     x:Name="btn_startGame"
                     Clicked="btn_startGame_Clicked"
                     VerticalOptions="End"/>
-            
+            <Label x:Name="lbl_score" Text="SCORE" FontSize="24" FontAttributes="bold" TextColor="red" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label x:Name="lbl_punteggio" 
+                   Text=""  
+                   FontSize="30" FontAttributes="Bold" TextColor="IndianRed"
+                   VerticalOptions="Center" HorizontalOptions="Center"  />
             <Button Text="Esci" 
                     x:Name="btn_esci" 
                     VerticalOptions="EndAndExpand"

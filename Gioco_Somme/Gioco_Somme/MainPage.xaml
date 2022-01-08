@@ -4,7 +4,7 @@
              x:Class="Gioco_Somme.MainPage">
 
     <StackLayout>
-        <Button x:Name="btn_gioco" Text="Inizia Gioco" HorizontalOptions="Center" Clicked="btn_gioco_Clicked"/>
+        <Button x:Name="btn_gioco" Text="Inizia Gioco" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Clicked="btn_gioco_Clicked"/>
     </StackLayout>
 
 </ContentPage>

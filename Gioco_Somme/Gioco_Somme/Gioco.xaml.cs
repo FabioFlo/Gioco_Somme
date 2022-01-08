@@ -26,39 +26,47 @@ namespace Gioco_Somme
         int posizione; // per far variare la posizione della risposta esatta sui bottoni
         private object result;
         private bool returnValue;
+        private int countDown;
+        private int countDownSecondsTot = 10;
+        public int punteggio = 0;
         
+        
+       
+
         private void btn_Risp_A_Clicked(object sender, EventArgs e)
         {
             if (btn_Risp_A.Text == $"{result}")
             {
+                Punteggio();
                 StartQuiz();
-
-
+                Reset();
             }
-        }
+        } //tasto A
 
         private void btn_Risp_B_Clicked(object sender, EventArgs e)
         {
             if (btn_Risp_B.Text == $"{result}")
             {
-
+                Punteggio();
                 StartQuiz();
-
+                Reset();
             }
-        }
+        } //tasto B
 
         private void btn_Risp_C_Clicked(object sender, EventArgs e)
         {
             if (btn_Risp_C.Text == $"{result}")
             {
+                Punteggio();
                 StartQuiz();
+                Reset();
             }
-        }
+        } //tasto C
 
-        private void btn_startGame_Clicked(object sender, EventArgs e)
+        private void btn_startGame_Clicked(object sender, EventArgs e) // inizia la partita
         {
-            // per la gestione del countdown
- 
+
+
             if (btn_startGame.Text == "Start")
             {
                 StartQuiz();
@@ -70,47 +78,45 @@ namespace Gioco_Somme
                 btn_startGame.Text = "Start";
                 returnValue = false;
             }
-            int count = 10;
-            lbl_seconds.Text = "";
+            // per la gestione del countdown
+            countDown = countDownSecondsTot;
+            lbl_countDown.Text = "";
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                
-                // Do something
 
-                if (count > 0)
+                if (countDown > 0)
                 {
-                    count -= 1;
+                    countDown -= 1;
+                    
                 }
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    lbl_seconds.Text = count.ToString();
+                    lbl_countDown.Text = countDown.ToString();
                 });
-                return returnValue; // True = Repeat again, False = Stop the timer
+                return returnValue; // True = ripeti, False = Stop timer
             });
 
         }
 
-        async private void btn_esci_Clicked(object sender, EventArgs e)
+        async private void btn_esci_Clicked(object sender, EventArgs e)// per uscire dal gioco
         {
             returnValue = false;
             await Navigation.PushAsync(new MainPage());
-            // per uscire dal gioco
-
         }
 
         public void StartQuiz()
         {
 
-            numA = numRandom.Next(1, 10);
-            numB = numRandom.Next(1, 10);
-            rispostaErrataA = numRandom.Next(2, 18);
-            rispostaErrataB = numRandom.Next(2, 18);
+            numA = numRandom.Next(1, 50);
+            numB = numRandom.Next(1, 50);
+            rispostaErrataA = numRandom.Next(2, 100);
+            rispostaErrataB = numRandom.Next(2, 100);
 
             lbl_quiz.Text = $"{numA} + {numB} =";
             result = numA + numB;
 
             posizione = numRandom.Next(2); // per cambiare la posizione della risposta esatta
-            if (posizione == 0) // la risposta apparirà sul bottona A
+            if (posizione == 0) // la risposta corretta apparirà sul bottona A
             {
                 btn_Risp_A.Text = $"{result}";
                 btn_Risp_B.Text = $"{rispostaErrataA}";
@@ -118,7 +124,7 @@ namespace Gioco_Somme
 
 
             }
-            else if (posizione == 1) //la risposta pparirà sul bottone B
+            else if (posizione == 1) //la risposta coretta apparirà sul bottone B
             {
                 btn_Risp_B.Text = $"{result}";
                 btn_Risp_A.Text = $"{rispostaErrataA}";
@@ -134,7 +140,19 @@ namespace Gioco_Somme
 
 
 
-        }
+        } // crea la domanda e le risposte
+        public void Reset()
+        {
+            if (countDown != countDownSecondsTot)
+            {
+                countDown = countDownSecondsTot;
+            }
+        } // riporta count a 10 secondi
+        public void Punteggio()
+        {
+            punteggio += countDown;
+            lbl_punteggio.Text = punteggio.ToString();
+        } // assegnazione punteggio
 
     }
 
