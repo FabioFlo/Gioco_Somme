@@ -150,8 +150,12 @@ namespace Gioco_Somme
         } // riporta count a 10 secondi
         public void Punteggio()
         {
-            punteggio += countDown;
-            lbl_punteggio.Text = punteggio.ToString();
+            if (returnValue==true)
+            {
+                punteggio += countDown;
+                lbl_punteggio.Text = punteggio.ToString();
+            }
+            
         } // assegnazione punteggio
 
     }
